@@ -1,0 +1,115 @@
+.bannerParentDiv {
+  padding: 10px;
+    padding-top: 5em;
+  }
+  .bannerParentDiv .bannerChildDiv {
+  }
+  .bannerParentDiv .bannerChildDiv .menuBar {
+    display: flex;
+    padding: 10px 16px 10px 16px;
+  }
+  
+  .bannerParentDiv .bannerChildDiv .menuBar span {
+  }.bannerParentDiv {
+    padding: 10px;
+    padding-top: 5em;
+    background-color: #f9f9f9;
+  }
+  
+  .bannerParentDiv .bannerChildDiv {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .bannerParentDiv .menuBar {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1em;
+  }
+  
+  .menuBar .categoryMenu {
+    display: flex;
+    align-items: center;
+  }
+  
+  .menuBar .categoryMenu span {
+    margin-right: 16px;
+    font-weight: bold;
+    color: #002f34;
+  }
+  
+  .menuBar .otherQuickOptions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .menuBar .otherQuickOptions span {
+    padding: 10px;
+    font-size: 14px;
+    color: #555;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  
+  .menuBar .otherQuickOptions span:hover {
+    color: #002f34;
+    text-decoration: underline;
+  }
+  
+  .banner {
+    position: relative;
+    width: 100%;
+  }
+  
+  .banner img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  
+  @media only screen and (max-width: 700px) {
+    .menuBar .otherQuickOptions {
+      display: none;
+    }
+  
+    .banner {
+      width: 100%;
+    }
+  }
+  
+  
+  .bannerParentDiv .bannerChildDiv .menuBar .categoryMenu span {
+    margin-right: 16px;
+    font-weight: bolder;
+  }
+  
+  .bannerParentDiv .bannerChildDiv .menuBar .otherQuickOptions {
+  }
+  .bannerParentDiv .bannerChildDiv .menuBar .otherQuickOptions span {
+    padding: 10px;
+  }
+  
+  .bannerChildDiv .banner {
+    position: relative;
+    width: 100vw;
+  }
+  .bannerChildDiv .banner img{
+    width: 100vw;
+  }
+  
+  @media only screen and (max-width: 700px) {
+    .otherQuickOptions {
+      display: none;
+    }
+    .bannerChildDiv .banner {
+      position: relative;
+    }
+  }
+  
