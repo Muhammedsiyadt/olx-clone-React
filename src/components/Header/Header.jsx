@@ -34,14 +34,14 @@ const Header = () => {
           <Arrow></Arrow>
         </div>
         <div className="loginPage">
-          <span>Login</span>
+          <a href="/login"><span>Login</span></a>
           <hr />
         </div>
 
         <div className="sellMenu">
           <SellButton></SellButton>
           <div className="sellMenuContent">
-            <SellButtonPlus></SellButtonPlus>
+            <a href="/create"><SellButtonPlus></SellButtonPlus></a>
             <span>SELL</span>
           </div>
         </div>
