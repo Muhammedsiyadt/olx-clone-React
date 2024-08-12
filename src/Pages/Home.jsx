@@ -6,12 +6,12 @@ import Banner from '../components/Banner/Banner';
 import Posts from '../components/Posts/Posts';
 import Footer from '../components/Footer/Footer';
 
-function Home(props) {
+function Home({setSearch, search}) {
   return (
     <div className="homeParentDiv">
-      <Header />
+      <Header setSearch={setSearch} />
       <Banner />
-      <Posts />
+      <Posts  search={search} />
       <Footer />
     </div>
   );

@@ -1,53 +1,86 @@
-import React from 'react'
-import './Header.css'
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './Header.css';
 import OlxLogo from '../../assets/OlxLogo';
 import Search from '../../assets/Search';
 import Arrow from '../../assets/Arrow';
 import SellButton from '../../assets/SellButton';
 import SellButtonPlus from '../../assets/SellButtonPlus';
+import { FirebaseContext } from "../../store/Context";
 
-const Header = () => {
+const Header = ({ setSearch }) => {
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(FirebaseContext);
+
+  const handleLogout = () => {
+    setUser(null);
+    navigate('/login'); 
+  };
+
   return (
     <div className="headerParentDiv">
       <div className="headerChildDiv">
         <div className="brandName">
-          <OlxLogo></OlxLogo>
-        </div>
+          <OlxLogo />
+        </div>  
         <div className="placeSearch">
-          <Search></Search>
-          <input type="text" />
-          <Arrow></Arrow>
+          <Search />
+          <input
+            className="inputSearch"
+            type="text"
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search..."
+          />
+          <Arrow />
         </div>
         <div className="productSearch">
           <div className="input">
             <input
+              onChange={(e) => setSearch(e.target.value)}
               type="text"
-              placeholder="Find car,mobile phone and more..."
+              placeholder="Find car, mobile phone and more..."
             />
           </div>
           <div className="searchAction">
-            <Search color="#ffffff"></Search>
+            <Search color="#ffffff" />
           </div>
         </div>
         <div className="language">
-          <span> ENGLISH </span>
-          <Arrow></Arrow>
+          <span>ENGLISH</span>
+          <Arrow />
         </div>
         <div className="loginPage">
-          <a href="/login"><span>Login</span></a>
+          {user ? (
+            <span
+              onClick={handleLogout}
+              style={{ cursor: 'pointer' }}
+            >
+              Logout
+            </span>
+          ) : (
+            <span
+              onClick={() => navigate('/login')}
+              style={{ cursor: 'pointer' }}
+            >
+              Login
+            </span>
+          )}
           <hr />
         </div>
-
         <div className="sellMenu">
-          <SellButton></SellButton>
+          <SellButton />
           <div className="sellMenuContent">
-            <a href="/create"><SellButtonPlus></SellButtonPlus></a>
-            <span>SELL</span>
+            <span
+              onClick={() => navigate('/create')}
+              style={{ cursor: 'pointer' }}
+            >
+              <SellButtonPlus />
+            </span>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

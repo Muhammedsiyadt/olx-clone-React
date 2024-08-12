@@ -2,8 +2,11 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SignUp.css";
 import Logo from "../../../src/olx-logo.png";
-import { FirebaseContext } from "../../store/context";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { FirebaseContext } from "../../store/Context";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { collection, addDoc } from "firebase/firestore";
+import { toast } from "react-toastify";
+import { db } from '../../firebase/config'; // Import correctly
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -11,25 +14,30 @@ const SignUp = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
 
-  const { auth } = useContext(FirebaseContext);
+  const { auth } = useContext(FirebaseContext); 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => { 
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((result) => {
-        updateProfile(result.user, { displayName: username })
-          .then(() => {
-            console.log("Profile updated successfully!");
-            navigate("/login"); // Navigate to login page after successful signup
-          })
-          .catch((error) => {
-            console.error("Error updating profile:", error);
-          });
-      })
-      .catch((error) => {
-        console.error("Error creating user:", error);
+    try {
+      const result = await createUserWithEmailAndPassword(auth, email, password);
+      const user = result.user;
+
+      
+      const userCollectionRef = collection(db, "user"); 
+      await addDoc(userCollectionRef, { 
+        uid: user.uid,
+        username,
+        authProvider: "local",
+        email
       });
+
+      console.log("Profile updated and user data saved successfully!");
+      navigate("/login"); 
+    } catch (error) {
+      toast.error(error.code.split('/')[1].split('-').join(" "));
+      console.log('Error:', error);
+    }
   };
 
   return (
