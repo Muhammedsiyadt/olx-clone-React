@@ -7,16 +7,20 @@ import { firebaseApp } from "../../firebase/config"; // Ensure this path is corr
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import { getAuth } from "firebase/auth"; // Import getAuth to get current user
 
 const Create = () => {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
   
   const navigate = useNavigate();
   const db = getFirestore(firebaseApp);
   const storage = getStorage(firebaseApp);
+  const auth = getAuth(); // Get the authentication instance
+  const currentUser = auth.currentUser; // Get the current logged-in user
 
   const validateForm = () => {
     if (!name.trim()) {
@@ -43,6 +47,8 @@ const Create = () => {
 
     if (!validateForm()) return;
 
+    setLoading(true);
+
     try {
       let imageUrl = "";
 
@@ -57,6 +63,7 @@ const Create = () => {
         category: category.trim(),
         price: parseFloat(price),
         imageUrl,
+        userId: currentUser.uid, // Add userId to the product data
       });
 
       toast.success("Product added successfully!");
@@ -67,9 +74,11 @@ const Create = () => {
 
       setTimeout(() => {
         navigate("/");
-      }, 2000); // Redirect after 2 seconds
+      }, 2000);
     } catch (error) {
       toast.error("Error adding product: " + error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -92,6 +101,7 @@ const Create = () => {
             id="name"
             name="name"
             onChange={(e) => setName(e.target.value)}
+            aria-label="Product Name"
           />
           <br />
           <label htmlFor="category">Category</label>
@@ -103,6 +113,7 @@ const Create = () => {
             id="category"
             name="category"
             onChange={(e) => setCategory(e.target.value)}
+            aria-label="Product Category"
           />
           <br />
           <label htmlFor="price">Price</label>
@@ -114,6 +125,7 @@ const Create = () => {
             type="number"
             id="price"
             name="price"
+            aria-label="Product Price"
           />
           <br />
           <label htmlFor="image">Image</label>
@@ -123,6 +135,7 @@ const Create = () => {
             id="image"
             accept="image/*"
             onChange={handleFileChange}
+            aria-label="Product Image"
           />
           <br />
           {image && (
@@ -134,7 +147,9 @@ const Create = () => {
             />
           )}
           <br />
-          <button type="submit" className="uploadBtn">Upload and Submit</button>
+          <button type="submit" className="uploadBtn" disabled={loading}>
+            {loading ? 'Uploading...' : 'Upload and Submit'}
+          </button>
         </form>
       </div>
     </>

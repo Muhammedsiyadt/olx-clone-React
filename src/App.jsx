@@ -7,6 +7,7 @@ import View from './components/View/View';
 import Create from './components/Create/Create';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ViewPost from './Pages/Viewpost';
 
 const App = () => {
 
@@ -25,6 +26,7 @@ const App = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/view' element={<View />} />
         <Route path='/create' element={<Create />} />
+        <Route path='/view/:id' element={<View />} />
       </Routes>
     </div>
   );

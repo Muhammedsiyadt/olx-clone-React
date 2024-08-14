@@ -3,8 +3,11 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/config"; // Adjust the path to your Firebase config
 import "./Posts.css";
 import Heart from "../../assets/Heart";
+import { useNavigate } from 'react-router-dom';
 
 const Posts = ({ search }) => {
+  const navigate = useNavigate();
+
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -35,7 +38,7 @@ const Posts = ({ search }) => {
         </div>
         <div className="cards">
           {products.map((product) => (
-            <div key={product.id} className="card">
+            <div key={product.id} className="card" onClick={() => navigate(`/view/${product.id}`)}>
               <div className="favorite">
                 <Heart />
               </div>
@@ -57,7 +60,7 @@ const Posts = ({ search }) => {
         </div>
         <div className="productCards">
           {filteredProducts.map((product) => (
-            <div key={product.id} className="productCard">
+            <div key={product.id} className="productCard" onClick={() => navigate(`/view/${product.id}`)}>
               <div className="productFavorite">
                 <Heart />
               </div>
