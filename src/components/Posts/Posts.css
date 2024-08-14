@@ -119,6 +119,7 @@
 .productCards {
   display: flex;
   flex-wrap: wrap;
+  margin-left: 100px;
   gap: 50px; /* Space between cards */
   padding: 16px;
   overflow-x: auto; /* For horizontal scrolling if needed */

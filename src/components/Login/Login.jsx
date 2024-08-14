@@ -23,6 +23,10 @@ const Login = () => {
     }
   };
 
+  const handleSignupClick = () => {
+    navigate('/signup');
+  };
+
   return (
     <div className="loginParentDiv">
       <img width="200px" height="200px" src={Logo} alt="OLX Logo" />
@@ -52,7 +56,10 @@ const Login = () => {
         <button type="submit">Login</button>
       </form>
       <div className="signupLink">
-        <a href="/signup">Don't have an account? Signup</a>
+        <br />
+      <button onClick={handleSignupClick} >
+        Don't have an account? Signup
+      </button>
       </div>
     </div>
   );
