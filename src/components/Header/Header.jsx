@@ -59,7 +59,7 @@ const Header = ({ setSearch }) => {
             </span>
           ) : (
             <span
-              onClick={() => navigate('/login')}
+              onClick={() => navigate('/login')} 
               style={{ cursor: 'pointer' }}
             >
               Login

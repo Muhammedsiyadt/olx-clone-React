@@ -17,20 +17,20 @@
   margin-bottom: 16px;
 }
 
-.heading :first-child {
+.heading > span:first-child {
   font-size: 24px;
   font-weight: bold;
   color: #002f34;
 }
 
-.heading :last-child {
+.heading > span:last-child {
   font-size: 14px;
   color: #005a61;
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
-.heading :last-child:hover {
+.heading > span:last-child:hover {
   color: #002f34;
 }
 
@@ -96,8 +96,13 @@
 
 .card .content .name {
   font-size: 16px;
-  color: #002f34;
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
 
 .card .date {
   display: flex;
@@ -105,6 +110,7 @@
   font-size: 12px;
   color: #6c757d;
 }
+
 
 .recommendations {
   margin: 16px 0;

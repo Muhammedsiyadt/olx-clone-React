@@ -13,20 +13,20 @@ const App = () => {
 
   const [search, setSearch] = useState('')
 
-  console.log(search);
+  console.log(search); 
   
 
-  return (
+  return ( 
     <div>
-      <ToastContainer theme='dark' />
+      <ToastContainer theme='dark' /> 
       
       <Routes>
         <Route path='/' element={<Home search={search} setSearch={setSearch} />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/view' element={<View />} />
+        {/* <Route path='/view' element={<View />} /> */}
         <Route path='/create' element={<Create />} />
-        <Route path='/view/:id' element={<View />} />
+        <Route path='/view/:id' element={<ViewPost />} /> 
       </Routes>
     </div>
   );

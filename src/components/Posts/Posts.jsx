@@ -3,7 +3,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/config"; // Adjust the path to your Firebase config
 import "./Posts.css";
 import Heart from "../../assets/Heart";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const Posts = ({ search }) => {
   const navigate = useNavigate();
@@ -23,10 +23,10 @@ const Posts = ({ search }) => {
     fetchProducts();
   }, []);
 
-  
-  const filteredProducts = products.filter(product =>
-    product.name.toLowerCase().includes(search.toLowerCase()) ||
-    product.category.toLowerCase().includes(search.toLowerCase())
+  const filteredProducts = products.filter(
+    (product) =>
+      product.name.toLowerCase().includes(search.toLowerCase()) ||
+      product.category.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -38,7 +38,11 @@ const Posts = ({ search }) => {
         </div>
         <div className="cards">
           {products.map((product) => (
-            <div key={product.id} className="card" onClick={() => navigate(`/view/${product.id}`)}>
+            <div
+              key={product.id}
+              className="card"
+              onClick={() => navigate(`/view/${product.id}`)}
+            >
               <div className="favorite">
                 <Heart />
               </div>
@@ -54,13 +58,18 @@ const Posts = ({ search }) => {
           ))}
         </div>
       </div>
+
       <div className="recommendations">
         <div className="heading">
           <span>Fresh recommendations</span>
         </div>
         <div className="productCards">
           {filteredProducts.map((product) => (
-            <div key={product.id} className="productCard" onClick={() => navigate(`/view/${product.id}`)}>
+            <div
+              key={product.id}
+              className="productCard"
+              onClick={() => navigate(`/view/${product.id}`)}
+            >
               <div className="productFavorite">
                 <Heart />
               </div>
